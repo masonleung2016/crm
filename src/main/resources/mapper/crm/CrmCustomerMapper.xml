@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufostudio.crm.modules.crm.dao.CrmCustomerMapper">
+  <resultMap id="BaseResultMap" type="com.ufostudio.crm.modules.crm.entity.po.CrmCustomer">
+    <id column="customer_id" jdbcType="BIGINT" property="customerId"/>
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+    <result column="company_id" jdbcType="BIGINT" property="companyId"/>
+    <result column="dept_id" jdbcType="BIGINT" property="deptId"/>
+    <result column="charge_id" jdbcType="BIGINT" property="chargeId"/>
+    <result column="province" jdbcType="VARCHAR" property="province"/>
+    <result column="city" jdbcType="VARCHAR" property="city"/>
+    <result column="area" jdbcType="VARCHAR" property="area"/>
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail"/>
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+    <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+    <result column="level" jdbcType="VARCHAR" property="level"/>
+    <result column="postal_code" jdbcType="VARCHAR" property="postalCode"/>
+    <result column="industry" jdbcType="VARCHAR" property="industry"/>
+    <result column="website" jdbcType="VARCHAR" property="website"/>
+    <result column="weibo" jdbcType="VARCHAR" property="weibo"/>
+    <result column="qq" jdbcType="VARCHAR" property="qq"/>
+    <result column="wechat" jdbcType="VARCHAR" property="wechat"/>
+    <result column="fax" jdbcType="VARCHAR" property="fax"/>
+    <result column="company_number" jdbcType="BIGINT" property="companyNumber"/>
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+    <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+    <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    customer_id, customer_name,company_id, dept_id, charge_id, province, city, area, address_detail,
+    phone_number, remarks, level, postal_code, industry, website, weibo, qq, wechat, 
+    fax, company_number, is_deleted, create_by, update_by, gmt_create, gmt_update
+  </sql>
+
+  <sql id="Dept_Company_User_Column_List">
+    m.customer_id, m.customer_name,m.company_id, m.dept_id, m.charge_id, m.province, m.city, m.area, m.address_detail,
+    m.phone_number, m.remarks, m.level, m.postal_code, m.industry, m.website, m.weibo, m.qq, m.wechat,
+    m.fax, m.company_number, m.is_deleted, m.create_by, m.update_by, m.gmt_create, m.gmt_update,
+    c.`name` as "company.name",
+    c.parent_id as "company.parentId",
+    c.parent_ids as "company.parentIds",
+    c.dept_id as "company.deptId",
+    c.`type` as "company.type",
+    d.`name` as "dept.name",
+    d.parent_id as "dept.parentId",
+    d.parent_ids as "dept.parentIds",
+    d.dept_id as "dept.deptId",
+    d.`type` as "dept.type",
+    u.user_id as "charger.userId",
+    u.username as "charger.username",
+    u2.user_id as "creater.userId",
+    u2.username as "creater.username"
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Dept_Company_User_Column_List"/>
+    from crm_customer m
+    LEFT JOIN sys_dept c ON m.company_id = c.dept_id
+    LEFT JOIN sys_dept d ON m.dept_id = d.dept_id
+    LEFT JOIN sys_user u ON m.charge_id = u.user_id
+    LEFT JOIN sys_user u2 ON m.create_by = u2.user_id
+    where m.customer_id = #{customerId,jdbcType=BIGINT} AND m.is_deleted = 0
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from crm_customer
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteBatch">
+    UPDATE crm_customer SET is_deleted = 1 where customer_id in
+    <foreach item="item" collection="array" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+  <select id="listMyChargedCustomerList" resultMap="BaseResultMap"
+          parameterType="com.ufostudio.crm.modules.crm.entity.po.CrmCustomer">
+    select
+    <include refid="Dept_Company_User_Column_List"/>
+    from crm_customer m
+    LEFT JOIN sys_dept c ON m.company_id = c.dept_id
+    LEFT JOIN sys_dept d ON m.dept_id = d.dept_id
+    LEFT JOIN sys_user u ON m.charge_id = u.user_id
+    LEFT JOIN sys_user u2 ON m.create_by = u2.user_id
+    <where>
+      m.is_deleted = 0
+      and
+      m.charge_id = #{chargeId,jdbcType=BIGINT}
+    </where>
+  </select>
+
+  <select id="listUserPermCustomerList" resultMap="BaseResultMap"
+          parameterType="com.ufostudio.crm.modules.crm.entity.po.CrmCustomer">
+    select
+    <include refid="Dept_Company_User_Column_List"/>
+    from crm_customer m
+    LEFT JOIN sys_dept c ON m.company_id = c.dept_id
+    LEFT JOIN sys_dept d ON m.dept_id = d.dept_id
+    LEFT JOIN sys_user u ON m.charge_id = u.user_id
+    LEFT JOIN sys_user u2 ON m.create_by = u2.user_id
+    <where>
+      m.is_deleted = 0
+      <!-- 数据范围过滤 -->
+      ${sqlMap.dsf}
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="com.ufostudio.crm.modules.crm.entity.po.CrmCustomer">
+    insert into crm_customer (customer_id, customer_name,company_id, dept_id,
+      charge_id, province, city,
+      area, address_detail, phone_number, 
+      remarks, level, postal_code, 
+      industry, website, weibo, 
+      qq, wechat, fax, company_number, 
+      create_by, update_by, gmt_create, 
+      gmt_update)
+    values (#{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR},#{companyId,jdbcType=BIGINT}, #{deptId,jdbcType=BIGINT},
+      #{chargeId,jdbcType=BIGINT}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+      #{area,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{postalCode,jdbcType=VARCHAR}, 
+      #{industry,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{weibo,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{companyNumber,jdbcType=BIGINT}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtUpdate,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.ufostudio.crm.modules.crm.entity.po.CrmCustomer">
+    insert into crm_customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="chargeId != null">
+        charge_id,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="addressDetail != null">
+        address_detail,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="postalCode != null">
+        postal_code,
+      </if>
+      <if test="industry != null">
+        industry,
+      </if>
+      <if test="website != null">
+        website,
+      </if>
+      <if test="weibo != null">
+        weibo,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="companyNumber != null">
+        company_number,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="chargeId != null">
+        #{chargeId,jdbcType=BIGINT},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="weibo != null">
+        #{weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNumber != null">
+        #{companyNumber,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.ufostudio.crm.modules.crm.entity.po.CrmCustomer">
+    update crm_customer
+    <set>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        dept_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="chargeId != null">
+        charge_id = #{chargeId,jdbcType=BIGINT},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        postal_code = #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="weibo != null">
+        weibo = #{weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNumber != null">
+        company_number = #{companyNumber,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.ufostudio.crm.modules.crm.entity.po.CrmCustomer">
+    update crm_customer
+    set customer_name = #{customerName,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      dept_id = #{deptId,jdbcType=BIGINT},
+      charge_id = #{chargeId,jdbcType=BIGINT},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      postal_code = #{postalCode,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      company_number = #{companyNumber,jdbcType=BIGINT},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP}
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </update>
+</mapper>
