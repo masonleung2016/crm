@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufostudio.crm.modules.sys.dao.SysDeptPOMapper">
+  <resultMap id="BaseResultMap" type="com.ufostudio.crm.modules.sys.entity.po.SysDeptPO">
+    <id column="dept_id" jdbcType="BIGINT" property="deptId"/>
+    <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+    <result column="parent_ids" jdbcType="VARCHAR" property="parentIds"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="alias_name" jdbcType="VARCHAR" property="aliasName"/>
+    <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    <result column="fax" jdbcType="VARCHAR" property="fax"/>
+    <result column="dept_email" jdbcType="VARCHAR" property="deptEmail"/>
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode"/>
+    <result column="address" jdbcType="VARCHAR" property="address"/>
+    <result column="type" jdbcType="TINYINT" property="type"/>
+    <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+    <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+    <result column="is_used" jdbcType="INTEGER" property="isUsed"/>
+    <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+    <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    a.dept_id, a.parent_id, a.parent_ids, a.name, a.alias_name, a.phone, a.fax, a.dept_email, a.zip_code,
+    a.address, a.type, a.order_num, a.remarks, a.is_deleted, a.is_used, a.create_by, a.update_by, a.gmt_create,
+    a.gmt_update
+  </sql>
+
+  <select id="listSysDept" resultMap="BaseResultMap" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysDeptPO">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_dept a
+    <where>
+      a.is_deleted = 0
+      <!-- 数据范围过滤 -->
+      ${sqlMap.dsf}
+    </where>
+  </select>
+
+  <select id="listSysCompany" resultMap="BaseResultMap" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysDeptPO">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_dept a
+    <where>
+      a.is_deleted = 0
+      AND a.type = 1
+      <!-- 数据范围过滤 -->
+      ${sqlMap.dsf}
+    </where>
+  </select>
+
+  <select id="listChildDept" resultMap="BaseResultMap" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysDeptPO">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_dept a
+    <where>
+      a.is_deleted = 0
+      <if test="deptId != null">
+        AND a.parent_id = #{deptId}
+      </if>
+      <!-- 数据范围过滤 -->
+      ${sqlMap.dsf}
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    p.name as parent_name
+    from sys_dept a
+    LEFT JOIN sys_dept p ON a.parent_id = p.dept_id
+    where a.dept_id = #{deptId,jdbcType=BIGINT} AND a.is_deleted = 0
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        UPDATE sys_dept SET is_deleted  = 1
+        where dept_id = #{deptId,jdbcType=BIGINT}
+    </delete>
+
+  <insert id="insert" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysDeptPO">
+    insert into sys_dept (dept_id, parent_id, parent_ids, 
+      name, alias_name, phone, 
+      fax, dept_email, zip_code, 
+      address, type, order_num, 
+      remarks, is_deleted, is_used, 
+      create_by, update_by)
+    values (#{deptId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{aliasName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{deptEmail,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{orderNum,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=VARCHAR}, #{isDeleted,jdbcType=INTEGER}, #{isUsed,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysDeptPO">
+    insert into sys_dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="parentIds != null">
+        parent_ids,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="aliasName != null">
+        alias_name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="deptEmail != null">
+        dept_email,
+      </if>
+      <if test="zipCode != null">
+        zip_code,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="isUsed != null">
+        is_used,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="parentIds != null">
+        #{parentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="aliasName != null">
+        #{aliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="deptEmail != null">
+        #{deptEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="isUsed != null">
+        #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysDeptPO">
+    update sys_dept
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="parentIds != null">
+        parent_ids = #{parentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="aliasName != null">
+        alias_name = #{aliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="deptEmail != null">
+        dept_email = #{deptEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsed != null">
+        is_used = #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where dept_id = #{deptId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysDeptPO">
+    update sys_dept
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      parent_ids = #{parentIds,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      alias_name = #{aliasName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      dept_email = #{deptEmail,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      is_used = #{isUsed,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP}
+    where dept_id = #{deptId,jdbcType=BIGINT}
+  </update>
+</mapper>
