@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufostudio.crm.modules.sys.dao.SysMenuPOMapper">
+  <resultMap id="BaseResultMap" type="com.ufostudio.crm.modules.sys.entity.po.SysMenuPO">
+    <id column="menu_id" jdbcType="BIGINT" property="menuId"/>
+    <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="url" jdbcType="VARCHAR" property="url"/>
+    <result column="perms" jdbcType="VARCHAR" property="perms"/>
+    <result column="type" jdbcType="INTEGER" property="type"/>
+    <result column="icon" jdbcType="VARCHAR" property="icon"/>
+    <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+    <result column="is_used" jdbcType="INTEGER" property="isUsed"/>
+    <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+    <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, parent_id, name, url, perms, type, icon, order_num, is_deleted, is_used, 
+    create_by, update_by, gmt_create, gmt_update
+  </sql>
+  <select id="listAllMenu" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_menu WHERE is_deleted = 0
+  </select>
+
+  <select id="listUserMenu" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_menu
+    where
+    menu_id IN (
+    select distinct rm.menu_id
+    from sys_user_role ur
+    LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+    where ur.user_id = #{userId,jdbcType=BIGINT}
+    ) AND sys_menu.is_deleted = 0 ORDER BY sys_menu.order_num
+  </select>
+
+  <select id="listAllPermission" resultType="java.lang.String">
+    select
+    sys_menu.perms
+    from sys_menu
+    where sys_menu.is_deleted = 0
+  </select>
+
+  <select id="listUserPermission" resultType="java.lang.String" parameterType="java.lang.Long">
+    select
+    sys_menu.perms
+    from sys_menu
+    where menu_id IN (
+    select distinct rm.menu_id
+    from sys_user_role ur
+    LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id
+    where ur.user_id = #{userId,jdbcType=BIGINT}
+    ) AND sys_menu.is_deleted = 0
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_menu
+    where menu_id = #{menuId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    UPDATE sys_menu SET is_deleted = -1
+    where menu_id = #{menuId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysMenuPO">
+    insert into sys_menu (menu_id, parent_id, name, 
+      url, perms, type, icon, 
+      order_num, is_deleted, is_used, 
+      create_by, update_by, gmt_create, 
+      gmt_update)
+    values (#{menuId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, #{isUsed,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysMenuPO">
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="perms != null">
+        perms,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="isUsed != null">
+        is_used,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null">
+        #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="isUsed != null">
+        #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysMenuPO">
+    update sys_menu
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null">
+        perms = #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="isUsed != null">
+        is_used = #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysMenuPO">
+    update sys_menu
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      perms = #{perms,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      is_used = #{isUsed,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP}
+    where menu_id = #{menuId,jdbcType=BIGINT}
+  </update>
+</mapper>
