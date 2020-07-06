@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufostudio.crm.modules.sys.dao.SysRolePOMapper">
+  <resultMap id="BaseResultMap" type="com.ufostudio.crm.modules.sys.entity.po.SysRolePO">
+    <id column="role_id" jdbcType="BIGINT" property="roleId"/>
+    <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+    <result column="enname" jdbcType="VARCHAR" property="enname"/>
+    <result column="role_type" jdbcType="VARCHAR" property="roleType"/>
+    <result column="data_scope" jdbcType="CHAR" property="dataScope"/>
+    <result column="is_sys" jdbcType="CHAR" property="isSys"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    <result column="dept_id" jdbcType="BIGINT" property="deptId"/>
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+    <result column="is_used" jdbcType="INTEGER" property="isUsed"/>
+    <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+    <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_name, enname, role_type, data_scope, is_sys, remark, dept_id, is_deleted, 
+    is_used, create_by, update_by, gmt_create, gmt_update
+  </sql>
+  <select id="listAllRole" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_role WHERE is_deleted = 0
+  </select>
+
+  <select id="listSysRoleByUserDept" resultMap="BaseResultMap"
+          parameterType="com.ufostudio.crm.modules.sys.entity.po.SysUserPO">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_role
+    <where>
+      is_deleted = 0
+      <choose>
+        <when test=" deptId != null and companyId != null ">
+          AND dept_id in (#{deptId,jdbcType=BIGINT},#{companyId,jdbcType=BIGINT})
+        </when>
+        <when test="deptId != null and companyId == null ">
+          AND dept_id = #{deptId,jdbcType=BIGINT}
+        </when>
+        <when test="deptId == null and companyId != null ">
+          AND dept_id = #{companyId,jdbcType=BIGINT}
+        </when>
+      </choose>
+    </where>
+
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_role
+    where role_id = #{roleId,jdbcType=BIGINT} AND is_deleted = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    UPDATE sys_role SET is_deleted = -1
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysRolePO">
+    insert into sys_role (role_id, role_name, enname, 
+      role_type, data_scope, is_sys, 
+      remark, dept_id, is_deleted, 
+      is_used, create_by, update_by, 
+      gmt_create, gmt_update)
+    values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{enname,jdbcType=VARCHAR}, 
+      #{roleType,jdbcType=VARCHAR}, #{dataScope,jdbcType=CHAR}, #{isSys,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{deptId,jdbcType=BIGINT}, #{isDeleted,jdbcType=INTEGER}, 
+      #{isUsed,jdbcType=INTEGER}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysRolePO"
+          useGeneratedKeys="true" keyProperty="roleId">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="enname != null">
+        enname,
+      </if>
+      <if test="roleType != null">
+        role_type,
+      </if>
+      <if test="dataScope != null">
+        data_scope,
+      </if>
+      <if test="isSys != null">
+        is_sys,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="isUsed != null">
+        is_used,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="enname != null">
+        #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataScope != null">
+        #{dataScope,jdbcType=CHAR},
+      </if>
+      <if test="isSys != null">
+        #{isSys,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="isUsed != null">
+        #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysRolePO">
+    update sys_role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="enname != null">
+        enname = #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        role_type = #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataScope != null">
+        data_scope = #{dataScope,jdbcType=CHAR},
+      </if>
+      <if test="isSys != null">
+        is_sys = #{isSys,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="isUsed != null">
+        is_used = #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ufostudio.crm.modules.sys.entity.po.SysRolePO">
+    update sys_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      enname = #{enname,jdbcType=VARCHAR},
+      role_type = #{roleType,jdbcType=VARCHAR},
+      data_scope = #{dataScope,jdbcType=CHAR},
+      is_sys = #{isSys,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=BIGINT},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
+      is_used = #{isUsed,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+</mapper>
