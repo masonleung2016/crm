@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry
+      location="/Volumes/Transcend/技术学习/java工具/mybatis-generator-core-1.3.5/mysql-connector-java-5.1.35.jar"/>
+
+  <context id="my" targetRuntime="MyBatis3">
+    <property name="javaFileEncoding" value="UTF-8"/>
+    <commentGenerator>
+      <property name="suppressDate" value="false"/>
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                    connectionURL="jdbc:mysql://101.201.232.225:3306/family-lock" userId="chikai"
+                    password="familylock666!">
+      <property name="useInformationSchema" value="true"/>
+    </jdbcConnection>
+
+    <javaModelGenerator targetPackage="cn.hang.crm.modules.sys.entity.po"
+                        targetProject="src/main/java">
+      <property name="enableSubPackages" value="true"/>
+      <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="/"
+                     targetProject="src/main/resources/mapper/sys">
+      <property name="enableSubPackages" value="true"/>
+    </sqlMapGenerator>
+
+    <javaClientGenerator targetPackage="cn.hang.crm.modules.sys.dao"
+                         targetProject="src/main/java" type="XMLMAPPER">
+      <property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+
+    <table tableName="sys_dept" domainObjectName="SysDeptPO"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+
+    <table tableName="sys_menu" domainObjectName="SysMenuPO"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+
+    <table tableName="sys_role" domainObjectName="SysRolePO"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+
+    <table tableName="sys_role_dept" domainObjectName="SysRoleDeptPO"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+
+    <table tableName="sys_role_menu" domainObjectName="SysRoleMenuPO"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+
+    <table tableName="sys_user" domainObjectName="SysUserPO"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+
+    <table tableName="sys_user_role" domainObjectName="SysUserRolePO"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+
+    <table tableName="sys_user_token" domainObjectName="SysUserTokenPO"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+
+
+  </context>
+</generatorConfiguration>
