@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <mvc:annotation-driven>
+    <mvc:argument-resolvers>
+      <bean class="com.ufostudio.crm.modules.sys.annotation.SysLoginUserHandlerMethodArgumentResolver"/>
+    </mvc:argument-resolvers>
+  </mvc:annotation-driven>
+
+  <!--使用Annotation自动注册Bean,只扫描@Controller-->
+  <context:component-scan
+      base-package="com.ufostudio.crm.modules.crm.comtroller,com.ufostudio.crm.modules.sys.controller"
+      use-default-filters="false">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+  </context:component-scan>
+
+  <mvc:default-servlet-handler/>
+
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    <property name="prefix" value="/WEB-INF/"/>
+    <property name="suffix" value=".jsp"/>
+  </bean>
+
+  <mvc:cors>
+    <mvc:mapping path="/sys/**"
+                 exposed-headers="token,UID"
+                 allowed-origins="*"
+                 allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                 allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,token,UID"
+                 allow-credentials="true"/>
+
+    <mvc:mapping path="/crm/**"
+                 exposed-headers="token,UID"
+                 allowed-origins="*"
+                 allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                 allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,token,UID"
+                 allow-credentials="true"/>
+
+    <mvc:mapping path="/manage/**"
+                 exposed-headers="token,UID"
+                 allowed-origins="*"
+                 allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                 allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,token,UID"
+                 allow-credentials="true"/>
+
+    <mvc:mapping path="/v2/api-docs"
+                 allowed-origins="*"
+                 allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                 allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                 allow-credentials="true"/>
+
+  </mvc:cors>
+
+  <bean id="swaggerConfig" class="com.ufostudio.crm.common.config.SwaggerConfig"/>
+
+</beans>
