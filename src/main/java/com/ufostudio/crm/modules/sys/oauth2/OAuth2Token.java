@@ -1,0 +1,29 @@
+package com.ufostudio.crm.modules.sys.oauth2;
+
+import org.apache.shiro.authc.AuthenticationToken;
+
+/**
+ * @Author: LCF
+ * @Date: 2020/7/5 22:21
+ * @Package: com.ufostudio.crm.modules.sys.oauth2
+ */
+
+public class OAuth2Token implements AuthenticationToken {
+
+    private String token;
+
+    public OAuth2Token(String token) {
+        this.token = token;
+    }
+
+    @Override
+    public String getPrincipal() {
+        return token;
+    }
+
+    @Override
+    public Object getCredentials() {
+        return token;
+    }
+}
+
