@@ -14,6 +14,7 @@ public interface ThirdClient {
      * @param verifyCode 验证码
      * @return true false
      */
+    
     boolean sendVerifyCode(String mobile, String verifyCode);
 
     /**
@@ -21,6 +22,7 @@ public interface ThirdClient {
      *
      * @return 上传token
      */
+    
     String getUpToken();
 
     /**
