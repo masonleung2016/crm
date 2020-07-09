@@ -17,6 +17,7 @@ public class QiniuClientFatory {
 
     public static QiniuClient getQiniuClient() {
         return qiniuClient;
+        
     }
 
 }
