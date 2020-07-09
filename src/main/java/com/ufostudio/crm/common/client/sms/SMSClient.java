@@ -6,8 +6,8 @@ package com.ufostudio.crm.common.client.sms;
  * @Package: com.ufostudio.crm.common.client.sms
  */
 
-
 public interface SMSClient {
+    
     /**
      * 给单个用户发短信
      *
@@ -16,5 +16,6 @@ public interface SMSClient {
      * @param paramString  模板变量值
      * @return
      */
+    
     boolean sendSMSToUser(String mobile, String templateCode, String paramString);
 }
