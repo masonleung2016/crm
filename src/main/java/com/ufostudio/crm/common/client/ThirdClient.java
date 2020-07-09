@@ -6,7 +6,6 @@ package com.ufostudio.crm.common.client;
  * @Package: com.ufostudio.crm.common.client
  */
 
-
 public interface ThirdClient {
     /**
      * 发送验证码
@@ -16,7 +15,6 @@ public interface ThirdClient {
      * @return true false
      */
     boolean sendVerifyCode(String mobile, String verifyCode);
-
 
     /**
      * 获取七牛上传token
