@@ -8,11 +8,15 @@ import com.qiniu.util.Auth;
  * @Date: 2020/7/5 17:06
  * @Package: com.ufostudio.crm.common.client.qiniu.impl
  */
+
 public class DefaultQiniuClient implements QiniuClient {
 
     public static final String QINIU_URL = "";
+    
     private static final String ACCESS_KEY = "";
+    
     private static final String SECRET_KEY = "";
+    
     private static final String BUCKET = "ckkey";
 
     @Override
