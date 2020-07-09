@@ -7,14 +7,18 @@ package com.ufostudio.crm.common.client.sms.model;
  */
 
 public class Content {
+    
     private String title;
+    
     private String summary;
+    
     private String body;
 
     /**
      * 可选参数
      */
     private String androidOpenType;
+    
     private String androidActivity;
 
     public Content() {
