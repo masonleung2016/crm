@@ -15,7 +15,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Package: com.ufostudio.crm.common.config
  */
 
-
 @Configuration
 @EnableSwagger2
 @ComponentScan (basePackages = {"cn.hang.crm.modules.api.controller"})
