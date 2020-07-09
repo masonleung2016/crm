@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
  * @Date: 2020/7/5 17:10
  * @Package: com.ufostudio.crm.common.client.impl
  */
+
 @Component ("thirdClient")
 public class DefaultThirdClient implements ThirdClient {
 
     private static final SMSClient SMS_CLIENT = SMSClientFactory.getSMSClient();
     private static final QiniuClient QINIU_CLIENT = QiniuClientFatory.getQiniuClient();
-
 
     @Override
     public boolean sendVerifyCode(String mobile, String verifyCode) {
