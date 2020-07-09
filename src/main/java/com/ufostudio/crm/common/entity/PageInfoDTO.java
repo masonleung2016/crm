@@ -20,22 +20,27 @@ public class PageInfoDTO implements Serializable {
      * 页码，默认是第一页
      */
     private int pageNum = 1;
+    
     /**
      * 每页显示的记录数，默认是15
      */
     private int pageSize = 15;
+    
     /**
      * 总记录数
      */
     private int totalRecord;
+    
     /**
      * sql中limit起始值
      */
     private int offset;
+    
     /**
      * sql中limit结束值
      */
     private int limit;
+    
     /*
     总页数
      */
