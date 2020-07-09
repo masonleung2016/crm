@@ -15,7 +15,6 @@ import java.util.Map;
  * @Package: com.ufostudio.crm.common.entity
  */
 
-
 @ApiModel (value = "接口返回对象", description = "")
 public class R extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
