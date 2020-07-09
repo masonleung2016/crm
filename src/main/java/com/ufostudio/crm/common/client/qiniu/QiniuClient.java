@@ -11,4 +11,5 @@ public interface QiniuClient {
     String getUpToken();
 
     String getImgUrl(String imgName);
+    
 }
