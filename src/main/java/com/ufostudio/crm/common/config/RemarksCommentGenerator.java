@@ -20,7 +20,6 @@ import java.util.Date;
  * @Package: com.ufostudio.crm.common.config
  */
 
-
 /**
  * 官方类似的功能见，在版本1.3.3中添加的 addRemarkComments <br>
  * http://www.mybatis.org/generator/configreference/commentGenerator.html <br>
@@ -28,6 +27,7 @@ import java.util.Date;
  *
  * @see DefaultCommentGenerator#addRemarkComments
  */
+
 public class RemarksCommentGenerator extends DefaultCommentGenerator {
 
     @Override
