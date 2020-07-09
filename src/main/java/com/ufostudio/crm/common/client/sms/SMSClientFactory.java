@@ -13,7 +13,9 @@ public class SMSClientFactory {
     private static SMSClient SMSClient;
 
     static {
+        
         SMSClient = new DefaultSMSClient();
+        
     }
 
     public SMSClientFactory() {
