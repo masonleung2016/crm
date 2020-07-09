@@ -61,6 +61,8 @@ public class DefaultSMSClient implements SMSClient {
             logger.error(e.toString());
             return false;
         }
+        
         return true;
+        
     }
 }
