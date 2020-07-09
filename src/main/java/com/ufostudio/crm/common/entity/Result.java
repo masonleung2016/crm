@@ -14,7 +14,6 @@ import java.util.Map;
  * @Package: com.ufostudio.crm.common.entity
  */
 
-
 @ApiModel (value = "接口返回对象", description = "")
 public class Result<T> implements java.io.Serializable {
 
