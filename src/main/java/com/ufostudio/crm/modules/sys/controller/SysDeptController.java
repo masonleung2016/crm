@@ -37,6 +37,7 @@ public class SysDeptController {
             @Authorization (value = "petoauth",
                     scopes = {@AuthorizationScope (scope = "sys:dept:list", description = "allows adding of pets")})
     })
+    
     @RequiresPermissions ("sys:dept:list")
     public R deptALlList() {
         SysUserPO loginUser = ShiroUtils.getCurrentUser();
@@ -86,5 +87,4 @@ public class SysDeptController {
         sysDeptService.updateDept(loginUser, sysDeptPO);
         return R.ok();
     }
-
 }
