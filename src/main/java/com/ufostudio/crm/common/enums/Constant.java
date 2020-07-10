@@ -8,8 +8,8 @@ package com.ufostudio.crm.common.enums;
  * @Package: com.ufostudio.crm.common.enums
  */
 
-
 public class Constant {
+    
     /**
      * 超级管理员ID
      */
@@ -17,9 +17,6 @@ public class Constant {
 
     /**
      * 菜单类型
-     *
-     * @author lihang
-     * @date 2016年11月15日 下午1:24:29
      */
     public enum DeptType {
         /**
@@ -48,9 +45,6 @@ public class Constant {
 
     /**
      * 菜单类型
-     *
-     * @author lihang
-     * @date 2016年11月15日 下午1:24:29
      */
     public enum MenuType {
         /**
@@ -79,9 +73,6 @@ public class Constant {
 
     /**
      * 定时任务状态
-     *
-     * @author lihang
-     * @date 2016年12月3日 上午12:07:22
      */
     public enum ScheduleStatus {
         /**
@@ -131,5 +122,4 @@ public class Constant {
             return value;
         }
     }
-
 }
