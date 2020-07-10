@@ -11,12 +11,10 @@ import java.util.List;
 public interface SysUserRoleService {
     /**
      * 新增或者更新用户角色关系
-     *
      * @param userId
      * @param roleIdList
      * @return
      */
     int insertOrUpdate(long userId, List<Long> roleIdList);
-
 
 }
