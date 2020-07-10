@@ -9,9 +9,7 @@ import java.util.List;
  * @Package: com.ufostudio.crm.modules.sys.entity.po
  */
 public class SysMenuPO implements Comparable<SysMenuPO> {
-    /**
-     *
-     */
+
     private Long menuId;
 
     /**
@@ -69,14 +67,8 @@ public class SysMenuPO implements Comparable<SysMenuPO> {
      */
     private Long updateBy;
 
-    /**
-     *
-     */
     private Date gmtCreate;
 
-    /**
-     *
-     */
     private Date gmtUpdate;
 
     private List<SysMenuPO> childMenus;
