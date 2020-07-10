@@ -29,4 +29,5 @@ public interface SysRolePOMapper {
     List<SysRolePO> listSysRoleByUserDept(SysUserPO sysUserPO);
 
     List<SysRolePO> listAllRole();
+    
 }
