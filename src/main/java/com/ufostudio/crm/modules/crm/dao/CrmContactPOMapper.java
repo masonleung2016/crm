@@ -43,4 +43,5 @@ public interface CrmContactPOMapper {
     Page<CrmContactPO> listUserPermContactList(CrmContactPO crmContactPO);
 
     void deleteBatch(Long[] ids);
+    
 }
