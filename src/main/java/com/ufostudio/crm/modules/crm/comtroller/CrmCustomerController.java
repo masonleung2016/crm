@@ -6,6 +6,7 @@ import com.ufostudio.crm.common.utils.ShiroUtils;
 import com.ufostudio.crm.modules.crm.entity.po.CrmCustomer;
 import com.ufostudio.crm.modules.crm.service.CrmCustomerService;
 import com.ufostudio.crm.modules.sys.entity.po.SysUserPO;
+
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -71,5 +72,4 @@ public class CrmCustomerController {
     public R delete(@RequestBody Long[] ids) {
         return crmCustomerService.deleteCustomerBatch(ids);
     }
-
 }
