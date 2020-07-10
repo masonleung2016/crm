@@ -12,6 +12,7 @@ import java.util.List;
  * @Date: 2020/7/5 22:18
  * @Package: com.ufostudio.crm.modules.sys.entity.po
  */
+
 public class SysRolePO {
 
     /**
@@ -42,9 +43,7 @@ public class SysRolePO {
      * 9：按明细设置;
      */
     public static final String DATA_SCOPE_CUSTOM = "9";
-    /**
-     *
-     */
+
     private Long roleId;
 
     /**
@@ -103,14 +102,8 @@ public class SysRolePO {
      */
     private Long updateBy;
 
-    /**
-     *
-     */
     private Date gmtCreate;
 
-    /**
-     *
-     */
     private Date gmtUpdate;
     /**
      * 角色对应的菜单列表
@@ -376,5 +369,4 @@ public class SysRolePO {
     public void setGmtUpdate(Date gmtUpdate) {
         this.gmtUpdate = gmtUpdate;
     }
-
 }
