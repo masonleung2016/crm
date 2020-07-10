@@ -42,4 +42,5 @@ public class ShiroUtils {
     public static SysUserPO getCurrentUser() {
         return (SysUserPO) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
     }
+    
 }
