@@ -17,9 +17,7 @@ import java.util.List;
  * @Package: com.ufostudio.crm.modules.sys.entity.po
  */
 public class SysUserPO extends BaseEntity<SysUserPO> {
-    /**
-     *
-     */
+
     private Long userId;
 
     /**
@@ -107,20 +105,15 @@ public class SysUserPO extends BaseEntity<SysUserPO> {
      */
     private Long updateBy;
 
-    /**
-     *
-     */
     private Date gmtCreate;
 
-    /**
-     *
-     */
     private Date gmtUpdate;
     /**
      * 角色列表
      */
 
     private List<SysRolePO> roleList;
+    
     private List<Long> roleIdList;
 
     public List<SysRolePO> getRoleList() {
