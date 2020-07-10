@@ -23,7 +23,9 @@ import java.util.List;
 @Component
 public abstract class BaseService {
     private static SysRolePOMapper sysRolePOMapper = SpringContextUtils.getBean(SysRolePOMapper.class);
+    
     private static SysDeptPOMapper sysDeptPOMapper = SpringContextUtils.getBean(SysDeptPOMapper.class);
+    
     /**
      * 日志对象
      */
