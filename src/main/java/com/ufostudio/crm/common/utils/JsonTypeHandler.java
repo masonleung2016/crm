@@ -17,6 +17,7 @@ import java.sql.SQLException;
 
 public class JsonTypeHandler<T> extends BaseTypeHandler<T> {
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    
     private Class<T> clazz;
 
     public JsonTypeHandler(Class<T> clazz) {
@@ -65,5 +66,4 @@ public class JsonTypeHandler<T> extends BaseTypeHandler<T> {
             return null;
         }
     }
-
 }
