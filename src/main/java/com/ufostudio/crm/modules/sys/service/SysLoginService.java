@@ -15,7 +15,6 @@ import com.ufostudio.crm.modules.sys.entity.po.SysUserTokenPO;
 public interface SysLoginService {
     /**
      * 登录验证
-     *
      * @param sysUserPO 用户名和密码
      * @return
      */
