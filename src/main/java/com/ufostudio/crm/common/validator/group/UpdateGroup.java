@@ -9,4 +9,5 @@ package com.ufostudio.crm.common.validator.group;
  */
 
 public interface UpdateGroup {
+  
 }
