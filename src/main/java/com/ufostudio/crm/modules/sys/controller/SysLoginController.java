@@ -35,5 +35,4 @@ public class SysLoginController {
         sysUserPO.setLoginIp(IPUtils.getIpAddr(request));
         return sysLoginService.login(sysUserPO);
     }
-
 }
