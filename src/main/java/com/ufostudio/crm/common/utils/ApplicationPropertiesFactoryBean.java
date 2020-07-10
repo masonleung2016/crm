@@ -22,8 +22,11 @@ public class ApplicationPropertiesFactoryBean extends PropertiesLoaderSupport
         implements FactoryBean<Properties>, InitializingBean {
 
     private static Logger logger = LoggerFactory.getLogger(ApplicationPropertiesFactoryBean.class);
+    
     private ResourceLoader resourceLoader = new DefaultResourceLoader();
+    
     private String propertiesListLocation = "classpath:/properties.lst";
+    
     private Properties properties;
 
     @Override
