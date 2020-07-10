@@ -32,6 +32,7 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
 
     @Autowired
     private SysUserPOMapper sysUserPOMapper;
+    
     @Autowired
     private SysUserRoleService sysUserRoleService;
 
