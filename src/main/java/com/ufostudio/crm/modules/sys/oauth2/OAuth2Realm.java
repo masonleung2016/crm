@@ -20,12 +20,16 @@ import java.util.Set;
  * @Date: 2020/7/5 22:21
  * @Package: com.ufostudio.crm.modules.sys.oauth2
  */
+
 @Component
 public class OAuth2Realm extends AuthorizingRealm {
+    
     @Autowired
     private SysUserTokenService sysUserTokenService;
+    
     @Autowired
     private SysUserPOMapper sysUserPOMapper;
+    
     @Autowired
     private SysMenuService sysMenuService;
 
