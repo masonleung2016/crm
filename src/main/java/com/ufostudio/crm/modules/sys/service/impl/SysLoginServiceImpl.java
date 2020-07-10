@@ -24,8 +24,10 @@ public class SysLoginServiceImpl implements SysLoginService {
 
     @Autowired
     private SysUserPOMapper sysUserPOMapper;
+    
     @Autowired
     private SysUserTokenService sysUserTokenService;
+    
     @Autowired
     private SysUserService sysUserService;
 
