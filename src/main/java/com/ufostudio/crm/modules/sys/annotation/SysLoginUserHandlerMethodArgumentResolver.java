@@ -24,8 +24,10 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
 public class SysLoginUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+    
     @Autowired
     private SysUserTokenService sysUserTokenService;
+    
     @Autowired
     private SysUserPOMapper sysUserPOMapper;
 
