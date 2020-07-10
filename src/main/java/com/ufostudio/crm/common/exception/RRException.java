@@ -9,9 +9,11 @@ package com.ufostudio.crm.common.exception;
  */
 
 public class RRException extends RuntimeException {
+    
     private static final long serialVersionUID = 1L;
 
     private String msg;
+    
     private int code = 500;
 
     public RRException(String msg) {
@@ -51,6 +53,4 @@ public class RRException extends RuntimeException {
     public void setCode(int code) {
         this.code = code;
     }
-
-
 }
