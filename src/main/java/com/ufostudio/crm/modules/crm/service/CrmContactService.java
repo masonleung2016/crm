@@ -15,7 +15,6 @@ import com.github.pagehelper.PageInfo;
 public interface CrmContactService {
     /**
      * 新增联系人
-     *
      * @param loginUser
      * @param crmContactPO
      * @return
@@ -24,7 +23,6 @@ public interface CrmContactService {
 
     /**
      * 修改联系人
-     *
      * @param loginUser
      * @param crmContactPO
      * @return
@@ -33,7 +31,6 @@ public interface CrmContactService {
 
     /**
      * 根据联系人id获取单个联系人详情
-     *
      * @param contactId
      * @return
      */
@@ -41,7 +38,6 @@ public interface CrmContactService {
 
     /**
      * 获取用户联系人列表
-     *
      * @param loginUser 当前登录用户
      * @param type      筛选类型，1为用户负责的联系人，2为用户数据权限上包含的联系人
      * @return
@@ -50,7 +46,6 @@ public interface CrmContactService {
 
     /**
      * 批量删除联系人
-     *
      * @return
      */
     R deleteContactBatch(Long[] ids);
