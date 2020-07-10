@@ -28,7 +28,6 @@ public interface SysMenuPOMapper {
 
     /**
      * 获取单个用户菜单列表（不包含按钮）
-     *
      * @param userId
      * @return
      */
@@ -36,7 +35,6 @@ public interface SysMenuPOMapper {
 
     /**
      * 获取单个用户权限列表
-     *
      * @param userId
      * @return
      */
@@ -44,14 +42,12 @@ public interface SysMenuPOMapper {
 
     /**
      * 获取所有菜单
-     *
      * @return
      */
     List<SysMenuPO> listAllMenu();
 
     /**
      * 获取所有权限
-     *
      * @return
      */
     List<String> listAllPermission();
