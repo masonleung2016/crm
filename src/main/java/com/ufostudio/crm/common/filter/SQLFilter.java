@@ -11,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
  * @Package: com.ufostudio.crm.common.filter
  */
 
-
 public class SQLFilter {
 
     /**
