@@ -28,10 +28,13 @@ import org.springframework.web.bind.annotation.*;
 @ResponseBody
 @Api (value = "后台角色相关")
 public class SysRoleController {
+    
     @Autowired
     private SysUserRoleService sysUserRoleService;
+    
     @Autowired
     private SysRoleService sysRoleService;
+    
     @Autowired
     private SysRoleDeptService sysRoleDeptService;
 
@@ -74,5 +77,4 @@ public class SysRoleController {
     public Result<SysRolePO> info(@PathVariable (value = "roleId") long roleId) {
         return sysRoleService.getRole(roleId);
     }
-
 }
