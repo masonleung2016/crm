@@ -11,7 +11,6 @@ import java.util.List;
 public interface SysRoleMenuService {
     /**
      * 新增或修改角色和菜单关系
-     *
      * @param roleId
      * @param menuIdList
      */
@@ -19,7 +18,6 @@ public interface SysRoleMenuService {
 
     /**
      * 根据角色id查询菜单id列表
-     *
      * @param roleId
      * @return
      */
