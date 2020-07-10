@@ -11,7 +11,6 @@ import com.ufostudio.crm.modules.sys.entity.po.SysUserTokenPO;
 public interface SysUserTokenService {
     /**
      * 生成用户token
-     *
      * @param userId
      * @return
      */
@@ -19,7 +18,6 @@ public interface SysUserTokenService {
 
     /**
      * 根据用户id获取用户token
-     *
      * @param userId
      * @return
      */
@@ -27,7 +25,6 @@ public interface SysUserTokenService {
 
     /**
      * 根据token值获取用户token
-     *
      * @param token
      * @return
      */
