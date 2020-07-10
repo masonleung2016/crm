@@ -12,6 +12,7 @@ import java.util.UUID;
  * @Date: 2020/7/5 22:22
  * @Package: com.ufostudio.crm.modules.sys.oauth2
  */
+
 public class TokenGenerator {
 
     private static final char[] HEX_CODE = "0123456789abcdef".toCharArray();
