@@ -8,4 +8,5 @@ package com.ufostudio.crm.common.validator.group;
  * @Package: com.ufostudio.crm.common.validator.group
  */
 public interface QcloudGroup {
+  
 }
