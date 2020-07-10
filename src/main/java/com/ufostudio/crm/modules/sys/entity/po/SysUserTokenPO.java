@@ -8,9 +8,7 @@ import java.util.Date;
  * @Package: com.ufostudio.crm.modules.sys.entity.po
  */
 public class SysUserTokenPO {
-    /**
-     *
-     */
+
     private Long userId;
 
     /**
@@ -23,14 +21,8 @@ public class SysUserTokenPO {
      */
     private Date expireTime;
 
-    /**
-     *
-     */
     private Date gmtCreate;
 
-    /**
-     *
-     */
     private Date gmtUpdate;
 
     /**
