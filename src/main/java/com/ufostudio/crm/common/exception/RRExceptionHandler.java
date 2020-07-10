@@ -1,6 +1,7 @@
 package com.ufostudio.crm.common.exception;
 
 import com.ufostudio.crm.common.entity.R;
+
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
