@@ -9,9 +9,7 @@ import java.util.Date;
  */
 
 public class SysRoleMenuPO {
-    /**
-     *
-     */
+
     private Long id;
 
     /**
@@ -24,14 +22,8 @@ public class SysRoleMenuPO {
      */
     private Long menuId;
 
-    /**
-     *
-     */
     private Date gmtCreate;
 
-    /**
-     *
-     */
     private Date gmtUpdate;
 
     /**
