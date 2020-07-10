@@ -22,6 +22,7 @@ public class SysUserTokenServiceImpl implements SysUserTokenService {
      * 12小时后过期
      */
     private final static int EXPIRE = 3600 * 12;
+    
     @Autowired
     private SysUserTokenPOMapper sysUserTokenPOMapper;
 
