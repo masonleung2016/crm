@@ -33,4 +33,5 @@ public interface SysUserPOMapper {
     int deleteBatch(Long[] userId);
 
     int updateLoginIPAndTime(SysUserPO sysUserPO);
+    
 }
