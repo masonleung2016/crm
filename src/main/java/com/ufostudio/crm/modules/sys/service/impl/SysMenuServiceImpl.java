@@ -25,6 +25,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Autowired
     private SysMenuPOMapper sysMenuPOMapper;
+    
     @Autowired
     private SysUserRolePOMapper sysUserRolePOMapper;
 
@@ -32,7 +33,6 @@ public class SysMenuServiceImpl implements SysMenuService {
     public List<SysMenuPO> getUserMenuList(Long userId) {
         return sysMenuPOMapper.listUserMenu(userId);
     }
-
 
     @Override
     public Set<String> getUserPermissions(long userId) {
