@@ -51,6 +51,7 @@ public class IoUtils {
         }
 
         byte[] b = new byte[DEFAULT_BUFFER_SIZE];
+        
         int len = 0;
 
         try {
