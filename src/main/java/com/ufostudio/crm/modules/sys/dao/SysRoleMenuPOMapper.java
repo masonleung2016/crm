@@ -31,4 +31,5 @@ public interface SysRoleMenuPOMapper {
     void deleteByRoleId(Long roleId);
 
     List<Long> queryMenuIdList(long roleId);
+    
 }
