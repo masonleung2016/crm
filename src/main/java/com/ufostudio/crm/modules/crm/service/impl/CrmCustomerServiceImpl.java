@@ -7,6 +7,7 @@ import com.ufostudio.crm.modules.crm.dao.CrmCustomerMapper;
 import com.ufostudio.crm.modules.crm.entity.po.CrmCustomer;
 import com.ufostudio.crm.modules.crm.service.CrmCustomerService;
 import com.ufostudio.crm.modules.sys.entity.po.SysUserPO;
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -64,7 +65,6 @@ public class CrmCustomerServiceImpl extends BaseService implements CrmCustomerSe
             Page<CrmCustomer> sysUserPOList = crmCustomerMapper.listUserPermCustomerList(crmCustomer);
             return new Result<>(new PageInfo<>(sysUserPOList));
         }
-
         return new Result<>();
     }
 
@@ -75,5 +75,4 @@ public class CrmCustomerServiceImpl extends BaseService implements CrmCustomerSe
         crmCustomerMapper.deleteBatch(ids);
         return R.ok();
     }
-
 }
