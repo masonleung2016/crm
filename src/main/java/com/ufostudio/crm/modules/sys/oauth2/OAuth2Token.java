@@ -25,5 +25,5 @@ public class OAuth2Token implements AuthenticationToken {
     public Object getCredentials() {
         return token;
     }
+    
 }
-
