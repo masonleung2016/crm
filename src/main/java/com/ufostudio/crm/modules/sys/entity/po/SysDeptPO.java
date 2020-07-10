@@ -15,9 +15,7 @@ import java.util.List;
  */
 
 public class SysDeptPO extends BaseEntity<SysDeptPO> {
-    /**
-     *
-     */
+
     private Long deptId;
 
     /**
@@ -102,20 +100,13 @@ public class SysDeptPO extends BaseEntity<SysDeptPO> {
      */
     private Long updateBy;
 
-    /**
-     *
-     */
     private Date gmtCreate;
 
-    /**
-     *
-     */
     private Date gmtUpdate;
 
     private List<SysDeptPO> childDept;
 
     private String parentName;
-
 
     public String getParentName() {
         return parentName;
@@ -462,6 +453,5 @@ public class SysDeptPO extends BaseEntity<SysDeptPO> {
     public void setGmtUpdate(Date gmtUpdate) {
         this.gmtUpdate = gmtUpdate;
     }
-
 
 }
