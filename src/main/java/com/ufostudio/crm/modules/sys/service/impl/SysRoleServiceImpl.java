@@ -22,10 +22,13 @@ import java.util.List;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService {
+    
     @Autowired
     private SysRolePOMapper sysRolePOMapper;
+    
     @Autowired
     private SysRoleMenuService sysRoleMenuService;
+    
     @Autowired
     private SysRoleDeptService sysRoleDeptService;
 
