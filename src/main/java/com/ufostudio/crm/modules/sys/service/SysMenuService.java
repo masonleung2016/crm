@@ -16,7 +16,6 @@ import java.util.Set;
 public interface SysMenuService {
     /**
      * 获取用户菜单列表
-     *
      * @param userId 用户id
      * @return
      */
@@ -24,7 +23,6 @@ public interface SysMenuService {
 
     /**
      * 获取用户权限集合
-     *
      * @param userId 用户id
      * @return
      */
@@ -32,7 +30,6 @@ public interface SysMenuService {
 
     /**
      * 获取当前用户所在公司的最高菜单
-     *
      * @param userId
      * @return
      */
@@ -40,7 +37,6 @@ public interface SysMenuService {
 
     /**
      * 获取当前用户所在公司的最高菜单（包含button）
-     *
      * @param userId
      * @return
      */
@@ -48,14 +44,12 @@ public interface SysMenuService {
 
     /**
      * 新增菜单
-     *
      * @param sysMenuPO
      */
     void addMenu(SysMenuPO sysMenuPO);
 
     /**
      * 根据菜单id获取菜单
-     *
      * @param parentId
      * @return
      */
@@ -63,14 +57,12 @@ public interface SysMenuService {
 
     /**
      * 修改菜单
-     *
      * @param sysMenuPO
      */
     void updateMenu(SysMenuPO sysMenuPO);
 
     /**
      * 删除菜单
-     *
      * @param menuId
      */
     void deleteMenu(long menuId);
