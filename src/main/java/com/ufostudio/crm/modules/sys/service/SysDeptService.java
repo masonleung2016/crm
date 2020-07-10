@@ -18,7 +18,6 @@ import java.util.List;
 public interface SysDeptService {
     /**
      * 获取系统部门
-     *
      * @param loginUser
      * @return
      */
@@ -26,7 +25,6 @@ public interface SysDeptService {
 
     /**
      * 获取系统公司
-     *
      * @param loginUser
      * @return
      */
@@ -34,7 +32,6 @@ public interface SysDeptService {
 
     /**
      * 增加系统部门
-     *
      * @param loginUser
      * @param sysDeptPO
      * @return
@@ -43,7 +40,6 @@ public interface SysDeptService {
 
     /**
      * 删除系统部门
-     *
      * @param loginUser
      * @param deptId
      * @return
@@ -52,7 +48,6 @@ public interface SysDeptService {
 
     /**
      * 根据id获取单个部门信息
-     *
      * @param loginUser
      * @param deptId
      * @return
@@ -61,7 +56,6 @@ public interface SysDeptService {
 
     /**
      * 修改系统部门
-     *
      * @param loginUser
      * @param sysDeptPO
      * @return
