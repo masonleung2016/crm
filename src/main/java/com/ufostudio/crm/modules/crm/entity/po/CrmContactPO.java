@@ -17,14 +17,9 @@ import java.util.Date;
 public class CrmContactPO extends BaseEntity<CrmContactPO> implements Serializable {
 
     private static final long serialVersionUID = -7412049457715034610L;
-    /**
-     *
-     */
+
     private Long contactId;
 
-    /**
-     *
-     */
     private Long customerId;
 
     /**
@@ -32,9 +27,6 @@ public class CrmContactPO extends BaseEntity<CrmContactPO> implements Serializab
      */
     private Long chargeId;
 
-    /**
-     *
-     */
     private String name;
 
     /**
@@ -62,9 +54,6 @@ public class CrmContactPO extends BaseEntity<CrmContactPO> implements Serializab
      */
     private String cellPhoneNumber;
 
-    /**
-     *
-     */
     private String email;
 
     /**
@@ -82,9 +71,6 @@ public class CrmContactPO extends BaseEntity<CrmContactPO> implements Serializab
      */
     private String department;
 
-    /**
-     *
-     */
     private String weibo;
 
     /**
