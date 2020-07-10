@@ -24,4 +24,5 @@ public interface SysUserTokenPOMapper {
     int updateByPrimaryKey(SysUserTokenPO record);
 
     SysUserTokenPO getTokenByToken(String token);
+    
 }
