@@ -9,9 +9,7 @@ import java.util.Date;
  */
 
 public class SysUserRolePO {
-    /**
-     *
-     */
+
     private Long id;
 
     /**
@@ -24,14 +22,8 @@ public class SysUserRolePO {
      */
     private Long roleId;
 
-    /**
-     *
-     */
     private Date gmtCreate;
 
-    /**
-     *
-     */
     private Date gmtUpdate;
 
     /**
