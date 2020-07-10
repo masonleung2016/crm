@@ -1556,7 +1556,7 @@ public class CrmContactPOExample {
     }
 
     /**
-     * crm_contact 2017-11-25
+     * crm_contact
      */
     public static class Criterion {
         private String condition;
