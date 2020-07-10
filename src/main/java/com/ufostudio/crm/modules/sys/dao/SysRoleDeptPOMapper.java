@@ -28,4 +28,5 @@ public interface SysRoleDeptPOMapper {
     void deleteByRoleId(Long roleId);
 
     void saveBatch(Map<String, Object> map);
+    
 }
