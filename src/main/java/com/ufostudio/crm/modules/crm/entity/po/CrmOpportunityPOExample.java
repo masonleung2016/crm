@@ -80,7 +80,7 @@ public class CrmOpportunityPOExample {
     }
 
     /**
-     * crm_opportunity 2017-11-25
+     * crm_opportunity
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1155,7 +1155,7 @@ public class CrmOpportunityPOExample {
     }
 
     /**
-     * crm_opportunity 2017-11-25
+     * crm_opportunity
      */
     public static class Criterion {
         private String condition;
