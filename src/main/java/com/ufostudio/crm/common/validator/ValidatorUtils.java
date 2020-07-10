@@ -16,7 +16,6 @@ import java.util.Set;
  * @Package: com.ufostudio.crm.common.validator
  */
 
-
 public class ValidatorUtils {
     private static Validator validator;
 
