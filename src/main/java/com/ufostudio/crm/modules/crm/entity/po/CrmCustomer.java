@@ -3,6 +3,7 @@ package com.ufostudio.crm.modules.crm.entity.po;
 import com.ufostudio.crm.common.entity.BaseEntity;
 import com.ufostudio.crm.modules.sys.entity.po.SysDeptPO;
 import com.ufostudio.crm.modules.sys.entity.po.SysUserPO;
+
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Date;
  */
 
 public class CrmCustomer extends BaseEntity<CrmCustomer> {
+    
     private Long customerId;
 
     @ApiModelProperty (value = "客户名称")
