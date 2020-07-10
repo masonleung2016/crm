@@ -34,5 +34,4 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
         map.put("roleIdList", roleIdList);
         return sysUserRolePOMapper.insertBatch(map);
     }
-
 }
