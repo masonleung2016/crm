@@ -25,6 +25,7 @@ import java.util.List;
 
 @Service
 public class SysDeptServiceImpl extends BaseService implements SysDeptService {
+    
     @Autowired
     private SysDeptPOMapper sysDeptPOMapper;
 
@@ -128,7 +129,6 @@ public class SysDeptServiceImpl extends BaseService implements SysDeptService {
             return null;
         }
         return childList;
-
     }
 
     private List<SysDeptPO> getSysRootDeptList(long rootId, List<SysDeptPO> allDeptPOList) {
