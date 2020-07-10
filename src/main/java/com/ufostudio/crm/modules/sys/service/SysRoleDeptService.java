@@ -14,7 +14,6 @@ import java.util.List;
 public interface SysRoleDeptService {
     /**
      * 新增或修改角色和机构关系
-     *
      * @param roleId
      * @param deptIdList
      */
@@ -22,7 +21,6 @@ public interface SysRoleDeptService {
 
     /**
      * 根据机构id查询所有角色
-     *
      * @param sysUserPO
      * @return
      */
