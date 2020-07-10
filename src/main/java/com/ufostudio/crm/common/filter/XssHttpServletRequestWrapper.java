@@ -135,5 +135,4 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     public HttpServletRequest getOrgRequest() {
         return orgRequest;
     }
-
 }
