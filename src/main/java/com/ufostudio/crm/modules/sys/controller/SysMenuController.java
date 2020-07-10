@@ -108,7 +108,6 @@ public class SysMenuController {
 
     /**
      * 菜单参数校验
-     *
      * @param menu
      */
     private void verifyForm(SysMenuPO menu) {
@@ -151,4 +150,3 @@ public class SysMenuController {
         }
     }
 }
-
