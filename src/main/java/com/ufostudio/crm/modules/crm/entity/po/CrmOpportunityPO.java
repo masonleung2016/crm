@@ -34,9 +34,6 @@ public class CrmOpportunityPO {
      */
     private Long chargeId;
 
-    /**
-     *
-     */
     private String remarks;
 
     /**
