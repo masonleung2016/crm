@@ -57,7 +57,6 @@ public class OAuth2Filter extends AuthenticatingFilter {
         return new OAuth2Token(token);
     }
 
-
     @Override
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
