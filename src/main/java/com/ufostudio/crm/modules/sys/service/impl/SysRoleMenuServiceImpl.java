@@ -17,6 +17,7 @@ import java.util.Map;
 
 @Service
 public class SysRoleMenuServiceImpl implements SysRoleMenuService {
+    
     @Autowired
     private SysRoleMenuPOMapper sysRoleMenuPOMapper;
 
@@ -38,4 +39,3 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
         return sysRoleMenuPOMapper.queryMenuIdList(roleId);
     }
 }
-
