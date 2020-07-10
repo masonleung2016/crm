@@ -30,4 +30,5 @@ public interface SysDeptPOMapper {
     List<SysDeptPO> listSysCompany(SysDeptPO sysDeptPO);
 
     List<SysDeptPO> listChildDept(SysDeptPO sysDeptPO);
+    
 }
