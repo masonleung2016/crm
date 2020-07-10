@@ -10,9 +10,7 @@ public interface BaseMapper {
 
     /**
      * 得到
-     *
      * @return
      */
     int getTotalCount();
-
 }
