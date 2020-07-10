@@ -43,62 +43,97 @@ public final class HTMLFilter {
 
     /** regex flag union representing /si modifiers in php **/
     private static final int REGEX_FLAGS_SI = Pattern.CASE_INSENSITIVE | Pattern.DOTALL;
+    
     private static final Pattern P_COMMENTS = Pattern.compile("<!--(.*?)-->", Pattern.DOTALL);
+    
     private static final Pattern P_COMMENT = Pattern.compile("^!--(.*)--$", REGEX_FLAGS_SI);
+    
     private static final Pattern P_TAGS = Pattern.compile("<(.*?)>", Pattern.DOTALL);
+    
     private static final Pattern P_END_TAG = Pattern.compile("^/([a-z0-9]+)", REGEX_FLAGS_SI);
+    
     private static final Pattern P_START_TAG = Pattern.compile("^([a-z0-9]+)(.*?)(/?)$", REGEX_FLAGS_SI);
+    
     private static final Pattern P_QUOTED_ATTRIBUTES = Pattern.compile("([a-z0-9]+)=([\"'])(.*?)\\2", REGEX_FLAGS_SI);
+    
     private static final Pattern P_UNQUOTED_ATTRIBUTES = Pattern.compile("([a-z0-9]+)(=)([^\"\\s']+)", REGEX_FLAGS_SI);
+    
     private static final Pattern P_PROTOCOL = Pattern.compile("^([^:]+):", REGEX_FLAGS_SI);
+    
     private static final Pattern P_ENTITY = Pattern.compile("&#(\\d+);?");
+    
     private static final Pattern P_ENTITY_UNICODE = Pattern.compile("&#x([0-9a-f]+);?");
+    
     private static final Pattern P_ENCODE = Pattern.compile("%([0-9a-f]{2});?");
+    
     private static final Pattern P_VALID_ENTITIES = Pattern.compile("&([^&;]*)(?=(;|&|$))");
+    
     private static final Pattern P_VALID_QUOTES = Pattern.compile("(>|^)([^<]+?)(<|$)", Pattern.DOTALL);
+    
     private static final Pattern P_END_ARROW = Pattern.compile("^>");
+    
     private static final Pattern P_BODY_TO_END = Pattern.compile("<([^>]*?)(?=<|$)");
+    
     private static final Pattern P_XML_CONTENT = Pattern.compile("(^|>)([^<]*?)(?=>)");
+    
     private static final Pattern P_STRAY_LEFT_ARROW = Pattern.compile("<([^>]*?)(?=<|$)");
+    
     private static final Pattern P_STRAY_RIGHT_ARROW = Pattern.compile("(^|>)([^<]*?)(?=>)");
+    
     private static final Pattern P_AMP = Pattern.compile("&");
+    
     private static final Pattern P_QUOTE = Pattern.compile("<");
+    
     private static final Pattern P_LEFT_ARROW = Pattern.compile("<");
+    
     private static final Pattern P_RIGHT_ARROW = Pattern.compile(">");
+    
     private static final Pattern P_BOTH_ARROWS = Pattern.compile("<>");
 
     // @xxx could grow large... maybe use sesat's ReferenceMap
     private static final ConcurrentMap<String, Pattern> P_REMOVE_PAIR_BLANKS = new ConcurrentHashMap<String, Pattern>();
+    
     private static final ConcurrentMap<String, Pattern> P_REMOVE_SELF_BLANKS = new ConcurrentHashMap<String, Pattern>();
 
     /** set of allowed html elements, along with allowed attributes for each element **/
     private final Map<String, List<String>> vAllowed;
+    
     /** counts of open tags for each (allowable) html element **/
     private final Map<String, Integer> vTagCounts = new HashMap<String, Integer>();
 
     /** html elements which must always be self-closing (e.g. "<img />") **/
     private final String[] vSelfClosingTags;
+    
     /** html elements which must always have separate opening and closing tags (e.g. "<b></b>") **/
     private final String[] vNeedClosingTags;
+    
     /** set of disallowed html elements **/
     private final String[] vDisallowed;
+    
     /** attributes which should be checked for valid protocols **/
     private final String[] vProtocolAtts;
+    
     /** allowed protocols **/
     private final String[] vAllowedProtocols;
+    
     /** tags which should be removed if they contain no content (e.g. "<b></b>" or "<b />") **/
     private final String[] vRemoveBlanks;
+    
     /** entities allowed within html markup **/
     private final String[] vAllowedEntities;
+    
     /** flag determining whether comments are allowed in input String. */
     private final boolean stripComment;
+    
     private final boolean encodeQuotes;
+    
     /**
      * flag determining whether to try to make tags when presented with "unbalanced"
      * angle brackets (e.g. "<b text </b>" becomes "<b> text </b>").  If set to false,
      * unbalanced angle brackets will be html escaped.
      */
     private final boolean alwaysMakeTags;
+    
     private boolean vDebug = false;
 
     /**
